@@ -8,8 +8,9 @@ Generate a new library
 ```workspace/ $ ng generate library lib-name --prefix cleed```
 
 Then modify the following files like so :
- - ```package.json``` located in ```workspace/projects/my-lib``` : modify the ```name``` to ```@cleed/my-lib```
- - ```tsconfig.json``` located in ```workspace/``` : replace the part of the ```paths``` key linked to the current library by the following 
+
+- 1 - ```package.json``` located in ```workspace/projects/my-lib``` : modify the ```name``` to ```@cleed/my-lib```
+- 2 - ```tsconfig.json``` located in ```workspace/``` : replace the part of the ```paths``` key linked to the current library by the following 
 ```
 "paths": {
 	
@@ -27,7 +28,7 @@ Then modify the following files like so :
 	(...)
 }
 ```
- - Delete the contents of the folder ```lib``` located at ```workspace/projects/my-lib/src``` and delete the content of the file ```public-api.ts``` located in the same folder
+- 3 - Delete the contents of the folder ```lib``` located at ```workspace/projects/my-lib/src``` and delete the content of the file ```public-api.ts``` located in the same folder
 
 ===
 
