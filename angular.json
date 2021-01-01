@@ -28,6 +28,7 @@
               "projects/box-cleed-v1/src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "projects/box-cleed-v1/src/styles.scss"
             ],
             "scripts": []
@@ -91,6 +92,7 @@
               "projects/box-cleed-v1/src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "projects/box-cleed-v1/src/styles.scss"
             ],
             "scripts": []
@@ -119,6 +121,46 @@
             "production": {
               "devServerTarget": "box-cleed-v1:serve:production"
             }
+          }
+        }
+      }
+    },
+    "lib-scribe": {
+      "projectType": "library",
+      "root": "projects/lib-scribe",
+      "sourceRoot": "projects/lib-scribe/src",
+      "prefix": "cleed",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/lib-scribe/tsconfig.lib.json",
+            "project": "projects/lib-scribe/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/lib-scribe/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/lib-scribe/src/test.ts",
+            "tsConfig": "projects/lib-scribe/tsconfig.spec.json",
+            "karmaConfig": "projects/lib-scribe/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/lib-scribe/tsconfig.lib.json",
+              "projects/lib-scribe/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
