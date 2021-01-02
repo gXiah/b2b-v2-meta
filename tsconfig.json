@@ -22,11 +22,24 @@
     "paths": {
       "@cleed/lib-scribe/*": [
         "projects/lib-scribe/*",
-        "projects/some-lib"
+        "projects/lib-scribe"
       ],
       "@cleed/lib-scribe": [
         "dist/lib-scribe/*",
         "dist/lib-scribe"
+      ],
+      
+      "@cleed/lib-ngui/*": [
+        "projects/lib-ngui/*",
+        "projects/lib-ngui"
+      ],
+      "@cleed/lib-ngui": [
+        "dist/lib-ngui/*",
+        "dist/lib-ngui"
+      ],
+      "lib-ngui": [
+        "dist/lib-ngui/lib-ngui",
+        "dist/lib-ngui"
       ]
     }
   },
