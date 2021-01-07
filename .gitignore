@@ -47,3 +47,4 @@ Thumbs.db
 
 # misc 2
 misc/
+!misc/*.xml
