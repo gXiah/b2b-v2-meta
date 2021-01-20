@@ -1,0 +1,93 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body{
+	font-family: sans-serif;
+}
+
+/*
+** LAYOUT
+*/
+
+// ===============
+// Every class starting with ".col-"
+@each $width in 2, 3, 4{
+	.col-#{$width} {
+		min-height: 100vh;
+		display: inline-block;
+		vertical-align: top;
+	}
+}
+
+.col-2{
+	width: 49%;
+}
+
+.col-3{
+	width: 32vw;
+}
+
+.col-4{
+	width: 24vw;
+}
+
+.tac{
+	text-align: center;
+}
+
+.tar{
+	text-align: right;
+}
+
+// ================
+
+// Colors:
+$colors: ('white', 'black', 'red');
+@each $color in $colors{
+	.paint-#{$color}{
+		color: #{$color} !important;
+	}
+}
+
+// ================
+
+@each $type in 1, 2, 3, 4, 5{
+	h#{$type}{
+		// Put common titles rules here
+	}
+}
+
+// ================
+
+#left-panel {
+}
+	#left-panel div:nth-child(1){
+		padding-top: 20px;
+		//background-color: $dark_grey;
+		border-right: 2px solid $asphalt;
+	}
+	#left-panel div:nth-child(2){
+		//background-color: $grey;
+	}
+
+#center-panel{
+	padding-top: 20px;
+}
+
+	#app{
+		border: 3px solid $asphalt;
+		border-radius: 5px;
+		padding: 10px;
+
+		min-height: 70vh;
+	}
+
+#right-panel{
+	padding-top: 20px;
+	background-color: $asphalt;
+	overflow-y: scroll;
+	overflow-wrap: break-word;
+}

@@ -21,21 +21,27 @@ var num_of_builds = (require('fs').readdirSync('dist/')).length;
 module.exports = {
 	outputDir: 'dist/build-' + num_of_builds,
 
+	// Aliases
 	configureWebpack: {
 		resolve: {
 			alias: {
-				"@lib": path.resolve(__dirname, 'src/components/libraries'),
-					"@vui": path.resolve(__dirname, 'src/components/libraries/vui'),
-						"@vui-units": path.resolve(__dirname, 'src/components/libraries/vui/vui-units')
+				"@containers": path.resolve(__dirname, 'public/containers'),
+
+				"@lib": path.resolve(__dirname, 'src/library'),
+					"@libcommon": path.resolve(__dirname, 'src/library/common'),
+						"@commoncmp": path.resolve(__dirname, 'src/library/common/components'),
+						"@commonpnl": path.resolve(__dirname, 'src/library/common/panels'),
+					"@libcustom": path.resolve(__dirname, 'src/library/custom')
 			}
 		}
 	},
 
+	// Main file (Where the app is mounted)
 	chainWebpack: (config) => {
 		config
 			.plugin('html')
 			.tap( (arg) => {
-				arg[0].template = './public/containers/simple.container.html'
+				arg[0].template = './public/containers/dev/dev.container.html'
 				return arg
 			})
 	}

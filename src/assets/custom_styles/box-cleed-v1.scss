@@ -1,0 +1,9 @@
+/*
+**
+** A box-specific style sheet is mainly a file that imports the needed files
+** it may also include its own css directives if need be (not enouraged)
+**
+*/
+
+@import '@/assets/common_styles/vars.scss';
+@import '@containers/dev/dev.container.style.scss';
