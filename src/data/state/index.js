@@ -80,6 +80,16 @@ const store = createStore({
 
 });
 
+
+/* 
+** ============================================= 
+** Initialisation (from config)
+** =============================================
+*/
+
+
+
+
 /* 
 ** ============================================= 
 ** Checks
@@ -92,10 +102,14 @@ store.dispatch('session/check_expired')
 		store.dispatch('session/destroy')
 		store.dispatch(
 						'session/generate', 
-						{datlifespan: store.getters['main/lifespan']}
+						{lifespan: store.getters['main/lifespan']}
 					)	
 	})
 	.catch(() => {})
+
+
+
+
 
 export default{
 	store

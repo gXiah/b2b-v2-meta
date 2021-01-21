@@ -31,7 +31,9 @@ module.exports = {
 					"@libcommon": path.resolve(__dirname, 'src/library/common'),
 						"@commoncmp": path.resolve(__dirname, 'src/library/common/components'),
 						"@commonpnl": path.resolve(__dirname, 'src/library/common/panels'),
-					"@libcustom": path.resolve(__dirname, 'src/library/custom')
+					"@libcustom": path.resolve(__dirname, 'src/library/custom'),
+
+				"@config": path.resolve(__dirname, 'src/configuration')
 			}
 		}
 	},

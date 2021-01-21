@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "es6-fs": "^1.1.1",
     "es6-promise": "^4.2.8",
     "uuid": "^8.3.2",
     "vue": "^3.0.0",

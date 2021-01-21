@@ -3,26 +3,21 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to porthole's documentation!
-====================================
+####################################
+Welcome to Porthole's documentation!
+####################################
 
 Introduction
 ============
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Table of Contents:
+   	:maxdepth: 2
 
-   Introduction <pages/intro/introduction>
+   	Introduction <pages/intro/introduction>
 
-Installation
-============
+	Installation </pages/installation/dependencies>
 
-.. toctree::
-	:maxdepth: 2
-	:caption: Installation
-
-	Installing dependencies </pages/installation/dependencies>
+	What Is </pages/whatis/whatis>
 
 ..
 	Indices and tables
