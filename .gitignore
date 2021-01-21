@@ -25,3 +25,4 @@ pnpm-debug.log*
 # Custom
 ./misc/
 !misc/*.xml
+!misc/docs/buidl/html/*

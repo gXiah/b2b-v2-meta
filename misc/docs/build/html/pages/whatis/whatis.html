@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>What is &mdash; porthole 1.0.0 documentation</title>
+  <title>What is section &mdash; porthole 1.0.0 documentation</title>
   
 
   
@@ -87,7 +87,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../intro/introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation/dependencies.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">What Is</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#configuration-system">Configuration System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#state-store">State Store</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-system">Configuration System</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-it-is">What it is</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-it-works">How it works</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-use-it">How to use it</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-add-a-configuration-file">How to add a configuration file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-read-write-from-a-configuration-file">How to Read / Write from a configuration file</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -138,7 +148,7 @@
     
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>What is</li>
+      <li>What is section</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -157,10 +167,41 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="what-is">
-<h1>What is<a class="headerlink" href="#what-is" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="what-is-section">
+<h1>What is section<a class="headerlink" href="#what-is-section" title="Permalink to this headline">¶</a></h1>
+<p>This section aims te define the components of Porthole, as well as to explain
+how to use / modify them.</p>
+<div class="section" id="state-store">
+<h2>State Store<a class="headerlink" href="#state-store" title="Permalink to this headline">¶</a></h2>
+</div>
 <div class="section" id="configuration-system">
 <h2>Configuration System<a class="headerlink" href="#configuration-system" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="what-it-is">
+<h3>What it is<a class="headerlink" href="#what-it-is" title="Permalink to this headline">¶</a></h3>
+<p>The configuration system is a set of <strong>tools</strong> and of <strong>rules</strong> that aim to
+provide an interface between the apps components, and their configuration.</p>
+<p>The goal is to have an independant configuration interface, to modify the
+apps behaviors without having to directly modify their code files.</p>
+</div>
+<div class="section" id="how-it-works">
+<h3>How it works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h3>
+<p>The configuration system is located in <code class="docutils literal notranslate"><span class="pre">`./src/configuration`</span></code> and is made of
+<strong>3 main components</strong> :</p>
+<ul class="simple">
+<li><p>The controllers : which are <code class="docutils literal notranslate"><span class="pre">`index.js`</span></code> and <code class="docutils literal notranslate"><span class="pre">`config.obj.js`</span></code></p></li>
+<li><p>The Global Config file : A global configuration file that acts as a default configuration</p></li>
+<li><p>The Custom Config Directory : A folder that contains custom configuration files that can override the global configuration.</p></li>
+</ul>
+</div>
+<div class="section" id="how-to-use-it">
+<h3>How to use it<a class="headerlink" href="#how-to-use-it" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="how-to-add-a-configuration-file">
+<h4>How to add a configuration file<a class="headerlink" href="#how-to-add-a-configuration-file" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="how-to-read-write-from-a-configuration-file">
+<h4>How to Read / Write from a configuration file<a class="headerlink" href="#how-to-read-write-from-a-configuration-file" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
 </div>
 </div>
 
