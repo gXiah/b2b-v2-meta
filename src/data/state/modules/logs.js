@@ -11,6 +11,12 @@
 **
 */
 
+/*
+** /!\ On Standby /!\
+**
+** This store module will become a wrapper to the 'VueLogger' plugin
+**	
+*/
 
 
 const state = {

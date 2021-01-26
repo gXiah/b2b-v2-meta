@@ -13,7 +13,7 @@ const state = {
 	/*
 	** Session Config 
 	*/
-	session_lifespan: -1 // (-1) for no expiry date; date in seconds otherwise
+	session_lifespan: undefined // (-1) for no expiry date; date in seconds otherwise
 }
 
 const actions = {
@@ -23,6 +23,10 @@ const actions = {
 	**		...
 	** }
 	*/
+
+	set_session_lifespan({ commit }, payload){
+		commit('set_session_lifespan', payload)
+	}
 
 }
 
@@ -34,6 +38,11 @@ export const mutations = {
 	** }
 	*/
 
+	set_session_lifespan(state, value){
+		state.session_lifespan = value;
+		return state.session_lifespan;
+	}
+
 }
 
 const getters = {
@@ -44,7 +53,7 @@ const getters = {
 	** }
 	*/
 
-	lifespan (state) {
+	session_lifespan (state) {
 		return state.session_lifespan;
 	}
 

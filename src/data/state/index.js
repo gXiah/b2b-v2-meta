@@ -10,6 +10,7 @@ import { createStore } 	from 'vuex'
 
 // Importing store modules
 import main_module 		from './modules/main';
+import pipeline_module 	from './modules/pipeline';
 import logs_module 		from './modules/logs';
 import session_module 	from './modules/session';
 
@@ -17,17 +18,13 @@ import session_module 	from './modules/session';
 import { createLogger } 	from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
 
-// @todo : Setup store modules
-
-
-
 /*
 ** =================================
 ** Plugins
 ** =================================
 */
 	const logger = createLogger({
-		collapsed: false,
+		collapsed: true,
 		logActions: true,
 		logMutations: true,
 		logger: console
@@ -68,6 +65,7 @@ const store = createStore({
 	*/
 	modules : {
 		main: 		main_module,
+		pipeline: 	pipeline_module,
 		logs: 		logs_module,
 		session: 	session_module
 	},
@@ -79,36 +77,6 @@ const store = createStore({
 		: [...prod_plugins, ...common_plugins]
 
 });
-
-
-/* 
-** ============================================= 
-** Initialisation (from config)
-** =============================================
-*/
-
-
-
-
-/* 
-** ============================================= 
-** Checks
-** =============================================
-*/
-
-// Checking if session has expired
-store.dispatch('session/check_expired')
-	.then(() => {
-		store.dispatch('session/destroy')
-		store.dispatch(
-						'session/generate', 
-						{lifespan: store.getters['main/lifespan']}
-					)	
-	})
-	.catch(() => {})
-
-
-
 
 
 export default{

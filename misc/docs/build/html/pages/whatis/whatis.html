@@ -92,6 +92,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#what-it-is">What it is</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#how-it-works">How it works</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#how-to-use-it">How to use it</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#initialisation">Initialisation</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#how-to-add-a-configuration-file">How to add a configuration file</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#how-to-read-write-from-a-configuration-file">How to Read / Write from a configuration file</a></li>
 </ul>
@@ -192,9 +193,182 @@ apps behaviors without having to directly modify their code files.</p>
 <li><p>The Global Config file : A global configuration file that acts as a default configuration</p></li>
 <li><p>The Custom Config Directory : A folder that contains custom configuration files that can override the global configuration.</p></li>
 </ul>
+<p>The <strong>controller</strong> <code class="docutils literal notranslate"><span class="pre">`index.js`</span></code> has the following structure</p>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kr">class</span> <span class="nx">Configuration</span>
+
+        <span class="cm">/*</span>
+<span class="cm">        ** Variables</span>
+<span class="cm">        */</span>
+
+        <span class="c1">// Config files have this extension</span>
+        <span class="nx">config_file_type</span> <span class="o">=</span> <span class="s1">&#39;js&#39;</span><span class="p">;</span>
+
+        <span class="c1">// Configuration directories (Global and custom)</span>
+        <span class="c1">//     Custom is always inside global</span>
+        <span class="nx">config_root</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">;</span>
+        <span class="nx">custom_config_dir</span> <span class="o">=</span> <span class="s2">&quot;customConfigurations&quot;</span><span class="p">;</span>
+
+        <span class="c1">// Configuration files paths</span>
+        <span class="nx">globalConfigPath</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">;</span>
+        <span class="nx">customConfigPath</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">;</span>
+
+        <span class="c1">// This is where the configuration is stored, after is has been</span>
+        <span class="c1">// retrieved, for it to be consumed by other components</span>
+        <span class="nx">globalConfig</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="nx">customConfig</span> <span class="o">=</span> <span class="p">{}</span>
+
+
+        <span class="cm">/*</span>
+<span class="cm">        ** Methods</span>
+<span class="cm">        */</span>
+
+        <span class="nx">constructor</span><span class="p">(</span><span class="k">void</span><span class="p">)</span>
+
+        <span class="c1">// Sets the global config path, and calls importConfig()</span>
+        <span class="nx">setGlobal</span><span class="p">(</span><span class="nx">path</span><span class="o">:</span> <span class="nx">text</span><span class="p">)</span>
+
+        <span class="c1">// Sets the custom config path, and calls importConfig()</span>
+        <span class="nx">setCustom</span><span class="p">(</span><span class="nx">path</span><span class="o">:</span> <span class="nx">text</span><span class="p">)</span>
+
+        <span class="c1">// Reads the config data from the corresponding config file</span>
+        <span class="p">(</span><span class="kr">private</span><span class="p">)</span> <span class="nx">importConfig</span><span class="p">(</span><span class="nx">path</span><span class="o">:</span> <span class="nx">text</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>This is the main file, the methods setGlobal(1)  [and optionally setCustom(1)]
+need to be called.</p>
+<p>The <strong>controller</strong> <code class="docutils literal notranslate"><span class="pre">`config.obj.js`</span></code> has the following structure</p>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kr">class</span> <span class="nx">ConfObj</span>
+
+        <span class="cm">/*</span>
+<span class="cm">        ** Variables</span>
+<span class="cm">        */</span>
+
+        <span class="c1">// Configuration name</span>
+        <span class="nx">name</span>
+
+        <span class="c1">// Configuration data</span>
+        <span class="nx">data</span>
+
+        <span class="cm">/*</span>
+<span class="cm">        ** Methods</span>
+<span class="cm">        */</span>
+
+        <span class="c1">// Initializes the configuration object, and names it &#39;conf_name&#39;</span>
+        <span class="nx">constructor</span><span class="p">(</span><span class="nx">conf_name</span><span class="p">)</span>
+
+        <span class="c1">// Add a new entry to the config object</span>
+        <span class="c1">// An entry is a JS object {key_name : key_data}</span>
+        <span class="nx">add</span><span class="p">(</span><span class="nx">key_name</span><span class="p">,</span> <span class="nx">key_data</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>The <strong>global configuration file</strong> acts as both a default configuration and
+a template for other configuration files</p>
+<p>Here is its structure :</p>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// A JS object</span>
+<span class="kd">let</span> <span class="nx">entry</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="nx">globalConfig</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;Entry Name&#39;</span><span class="p">,</span> <span class="nx">entry</span><span class="p">)</span>
+
+<span class="cm">/*</span>
+<span class="cm">** IMPORTANT : Global config exports as &#39;globalConfig&#39;</span>
+<span class="cm">**      and a custom config ALWAYS exports as &#39;customConfig&#39;</span>
+<span class="cm">*/</span>
+<span class="kr">export</span> <span class="k">default</span><span class="p">{</span>
+        <span class="nx">globalConfig</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
 </div>
 <div class="section" id="how-to-use-it">
 <h3>How to use it<a class="headerlink" href="#how-to-use-it" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="initialisation">
+<h4>Initialisation<a class="headerlink" href="#initialisation" title="Permalink to this headline">¶</a></h4>
+<p>In your application entry point (Example : <code class="docutils literal notranslate"><span class="pre">`main.js`</span></code> for a <em>Vue</em> application of <code class="docutils literal notranslate"><span class="pre">`main.ts`</span></code> for an <em>Angular</em> one) :</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// Call the Configuration system</span>
+
+
+<span class="c1">// @config is the path to the configuration system</span>
+<span class="c1">// For further details about this path, check out ```./vue.config.js``` @ *configureWebpack ... alias*</span>
+<span class="kr">import</span> <span class="nx">Configuration</span> <span class="nx">from</span> <span class="s1">&#39;@config&#39;</span><span class="p">;</span><span class="sb">``</span>
+
+
+<span class="c1">// Setup the configuration system</span>
+<span class="c1">// process.env() here is the configuration file name</span>
+<span class="kd">let</span> <span class="nx">config</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Configuration</span><span class="p">.</span><span class="nx">Configuration</span><span class="p">()</span>
+<span class="nx">config</span><span class="p">.</span><span class="nx">setGlobal</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">VUE_APP_GLOBAL_CONFIG_FILE</span><span class="p">)</span>
+<span class="nx">config</span><span class="p">.</span><span class="nx">setCustom</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">VUE_APP_CUSTOM_CONFIG_FILE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="how-to-add-a-configuration-file">
 <h4>How to add a configuration file<a class="headerlink" href="#how-to-add-a-configuration-file" title="Permalink to this headline">¶</a></h4>
 </div>

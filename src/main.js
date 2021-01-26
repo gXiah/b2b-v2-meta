@@ -13,9 +13,8 @@ import '@/assets/custom_styles/box-cleed-v1.scss';
 // ES6 Promise for IE (Vuex)
 import 'es6-promise/auto';
 
-
-// 
-var app = createApp(BoxCleed)
+// Logger
+import VueLogger from 'vuejs-logger';
 
 
 // Configuration Setup
@@ -23,13 +22,57 @@ let config = new Configuration.Configuration()
 config.setGlobal(process.env.VUE_APP_GLOBAL_CONFIG_FILE)
 config.setCustom(process.env.VUE_APP_CUSTOM_CONFIG_FILE)
 
+config
+	.init()
+	.then(() => {
 
-// Using Global State (Vuex Store)
-app.use(State)
+
+		// 
+		var app = createApp(BoxCleed)
 
 
 
-/*
-** Mount
-*/
-app.mount('#app')
+		/* 
+		** ===============================
+		** Using Global State (Vuex Store)
+		** ===============================
+		*/
+		
+
+		let store = State.store;
+		app.use(store)
+
+		/* Config Initialization */
+			store.dispatch(
+				'main/set_session_lifespan', 
+				config.get('session/lifespan'))
+		
+		/* Checks */
+
+		// Checking to see if session has expired
+			store.dispatch('session/check_expired')
+				.then(() => {
+					store.dispatch('session/destroy')
+					store.dispatch(
+									'session/generate', 
+									{lifespan: store.getters['main/session_lifespan']}
+								)	
+				})
+				.catch(() => {})
+
+
+
+
+
+		// Using Vue-logger
+		app.use(VueLogger, config.get('logging/*'))
+		
+		/*
+		** Mount
+		*/
+		app.mount('#app');
+
+	})
+	.catch((err) => {
+		console.log('[Cleed]', err)
+	})
