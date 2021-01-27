@@ -4,6 +4,8 @@
 
 <script>
 
+	import { GUID } from '@guid';
+
 	export default{
 		name : 'vuiButton',
 
@@ -21,9 +23,9 @@
 			this.$store.dispatch(
 							'pipeline/subscribe',
 							{
-								public_id: "id",
-								private_key:"key",
-								signatures: ["button","custom"]
+								public_id: `vui-button-${GUID.min_gen()}`,
+								private_key: GUID.generate(),
+								signatures: ["button"]
 							}
 						)
 		},
@@ -49,4 +51,9 @@
 
 <style scoped>
 	
+	button{
+		padding: 5px;
+		font-weight: bold;
+	}
+
 </style>

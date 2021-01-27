@@ -9,9 +9,9 @@ import { GUID } from './guid';
 class PipelineController{
 
 	/* 
-	** =====
+	** ======================================================
 	** TYPES
-	** =====
+	** ======================================================
 	*/
 
 	/*
@@ -29,11 +29,34 @@ class PipelineController{
 	*/
 	SUBSCRIPTION = {
 						"public_id": "", 
-						"private_key":"", 
+						"private_key":GUID.generate(), 
 						"signatures": []
 					}
 
 
+	/*
+	** An Order is :
+	**
+	**  =====================================
+	** |
+	** |	Sender ID
+	** |	Request Body
+	** |	Target ID / Boradcast ID (ARP)
+	** |
+	**  =====================================
+	** 
+	** Bellow is a blueprint for comparison purposes
+
+
+
+
+	/*
+	** ======================================================
+	** CONSTANTS
+	** ======================================================
+	*/
+
+	PARSE_ERROR = -1;
 
 
 	constructor(){}
@@ -67,7 +90,6 @@ class PipelineController{
 				if (typeof(ret[`${key}`]) == typeof(payload[`${key}`])){
 					ret[key] = payload[key]
 				}else{
-					console.log(typeof(ret[`${key}`]), typeof(payload[`${key}`]))
 					error_flag = true;
 				}
 
@@ -78,7 +100,7 @@ class PipelineController{
 
 		})
 
-		return (error_flag) ? {} : ret;
+		return (error_flag) ? this.PARSE_ERROR : ret;
 	}
 
 }

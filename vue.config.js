@@ -33,7 +33,8 @@ module.exports = {
 						"@commonpnl": path.resolve(__dirname, 'src/library/common/panels'),
 					"@libcustom": path.resolve(__dirname, 'src/library/custom'),
 
-				"@config": path.resolve(__dirname, 'src/configuration')
+				"@config": path.resolve(__dirname, 'src/configuration'),
+				"@guid": path.resolve(__dirname, 'src/data/state/controllers/guid')
 			}
 		}
 	},

@@ -12,4 +12,8 @@ export class GUID{
 		return guid_v4();
 	}
 
+	static min_gen(){
+		return parseInt(Math.random() * 1000);
+	}
+
 }

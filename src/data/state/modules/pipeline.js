@@ -12,6 +12,12 @@ const state = {
 	module_name : 'pipeline',
 	controller: new PipelineController.PipelineController(),
 
+
+	/*
+	** ERRORS
+	*/
+	SUBSCRIPTION_ERROR: -1,
+
 	/*
 	** This is the list of Orders that have not yet been dealt with
 	*/ 
@@ -52,9 +58,19 @@ const actions = {
 	subscribe({ commit }, payload){
 
 		// Parse and check payload
-		console.log(state.controller.parse(payload, state.controller.SUBSCRIPTION));
+		let subscription = state.controller.parse(payload, state.controller.SUBSCRIPTION)
 
-		// Add subscription to state
+		if (subscription != state.controller.PARSE_ERROR){
+			// Add subscription to state
+
+			state.subscriptions[subscription.private_key] = {
+											public_id: subscription.public_id,
+											signature: subscription.signatures
+															}
+			console.log(state.subscriptions)
+		}else{
+			return state.SUBSCRIPTION_ERROR
+		}
 
 	}
 
