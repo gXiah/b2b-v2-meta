@@ -1,7 +1,7 @@
 <template>
     <div id="panel-dashboard">
         <h2>Panel #{{panel_id}}</h2>
-        <vuiButton value="Button value"></vuiButton>
+        <vuiButton targetId="#ARP::Broadcast"></vuiButton>
     </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-	<button @click="clicked">Increment : {{num}}</button>
+	<button @click="clicked">{{public_id}} -> {{targetId}}</button>
 </template>
 
 <script>
@@ -11,20 +11,21 @@
 
 		data(){
 			return {
-				
+				public_id: `vui-button-${GUID.min_gen()}`,
+				private_key: GUID.generate()
 			}
 		},
 
 		props: [
-			'value'
+			'targetId'
 		],
 
 		mounted(){
 			this.$store.dispatch(
 							'pipeline/subscribe',
 							{
-								public_id: `vui-button-${GUID.min_gen()}`,
-								private_key: GUID.generate(),
+								public_id: this.public_id,
+								private_key: this.private_key,
 								signatures: ["button"]
 							}
 						)
@@ -34,15 +35,23 @@
 
 		methods: {
 			clicked(){
-				this.$store.dispatch('pipeline/val')
+				this.$store.dispatch('pipeline/send', 
+										{	
+											sender_key: this.private_key,
+											sender_id:this.public_id,
+											request_body: {a:1,b:"2"},
+											target_id: this.$props.targetId
+										}
+									)
 			}
 		},
 
 		computed: {
 
-			/*num(){
-				return this.$store.getters['pipeline/val'](2)
-			}*/
+			listener(){
+				return this.$store.getters['pipeline/listen'](this.private_key);
+
+			}
 
 		}
 	};
