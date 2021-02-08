@@ -1,8 +1,8 @@
 <template>
 
-  <panelDashboard panel_id="1"></panelDashboard>
+  <panelDashboard panel_id="1" targetId="#ARP::Broadcast"></panelDashboard>
   <br>
-  <panelDashboard panel_id="2"></panelDashboard>
+  <panelDashboard panel_id="2" targetId="wrong"></panelDashboard>
   <br>
   <pipelineView></pipelineView>
   <!-- ==== EXAMPLE ====

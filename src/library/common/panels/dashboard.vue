@@ -1,7 +1,7 @@
 <template>
     <div id="panel-dashboard">
         <h2>Panel #{{panel_id}}</h2>
-        <vuiButton targetId="#ARP::Broadcast"></vuiButton>
+        <vuiButton :targetId="targetId"></vuiButton>
     </div>
 </template>
 
@@ -13,7 +13,8 @@
         name: 'panelDashboard',
 
         props: [
-            'panel_id'
+            'panel_id',
+            'targetId'
         ],
 
         components: {

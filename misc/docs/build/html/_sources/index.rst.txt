@@ -19,6 +19,8 @@ Introduction
 
 	What Is </pages/whatis/whatis>
 
+	Internal Communication Process </pages/internal_comms/internal_comms>
+
 ..
 	Indices and tables
 	==================

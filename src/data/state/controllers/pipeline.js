@@ -57,12 +57,17 @@ class PipelineController{
 
 
 	REQUESTS = [
-		"#ARP::Broadcast"
+		"#ARP::Broadcast",
+
+		"#SIG::Signature"
 	]
 
 		REQUESTS_ALIASES = {
 			ARP: this.REQUESTS[0],
-			"#ARP::Broadcast": this.REQUESTS[0]
+			"#ARP::Broadcast": this.REQUESTS[0],
+
+			SIG: this.REQUESTS[1],
+			"#SIG::Signature": this.REQUESTS[1]
 		}
 
 	// If the sender_key should be sent to the target or not

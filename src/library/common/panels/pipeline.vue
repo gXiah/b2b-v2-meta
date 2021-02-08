@@ -14,12 +14,12 @@
             <h5>Broadcast (ARP)</h5>
             <hr><br>
             <p 
-                v-for="req in listener[2]" v-bind:key="req"
+                v-for="req in listener[1]" v-bind:key="req"
                 style="border:1px solid black;padding:5px; margin-bottom:5px;"
             >
                 Sender ID # {{ req.sender_id }}
                 <br>
-                Sender Key {{ req.sender_key ? req.sender_key : '--deactivated' }}
+                Sender Key {{ req.sender_key ? req.sender_key : '***********' }}
                 <br>
                 Body : {{ req.request_body }}
                 <br>

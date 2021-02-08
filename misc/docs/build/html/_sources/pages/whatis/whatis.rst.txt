@@ -8,7 +8,7 @@ how to use / modify them.
 State Store
 ***********
 
-
+@odo
 
 ********************
 Configuration System
@@ -163,5 +163,9 @@ In your application entry point (Example : ```main.js``` for a *Vue* application
 How to add a configuration file
 *******************************
 
+@todo
+
 How to Read / Write from a configuration file
 *********************************************
+
+@todo

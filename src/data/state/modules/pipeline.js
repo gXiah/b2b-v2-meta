@@ -98,7 +98,22 @@ export const mutations = {
 
 	send(state, payload){
 		state.mail_room[payload.target_id] = payload.body
+	},
+
+	/*
+	** This method deletes an element from the mail room
+	**	Only the target can delete a message that was meant to it
+	**
+	*/
+	/* @TODO
+	delete_message(state, target_id, private_key){
+
+		state.subscriptions.forEach((sub) => {
+			console.log(sub)
+		})
+
 	}
+	*/
 
 }
 
@@ -109,12 +124,12 @@ const getters = {
 	},
 
 	listen: (state, getters) => 
-		(key) => {
+		(key, consume=false) => {
 			let ret = []
 			ret = [
 				state.mail_room[key], 
-				state.val, 
-				state.controller.get_special_requests(state.ARP_KEY, state.mail_room)
+				state.controller.get_special_requests(state.ARP_KEY, state.mail_room),
+				state.val
 			]
 			
 			return ret
