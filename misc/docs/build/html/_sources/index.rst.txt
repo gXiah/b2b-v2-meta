@@ -11,7 +11,7 @@ Introduction
 ============
 
 .. toctree::
-   	:maxdepth: 2
+   	:maxdepth: 3
 
    	Introduction <pages/intro/introduction>
 
@@ -20,6 +20,7 @@ Introduction
 	What Is </pages/whatis/whatis>
 
 	Internal Communication Process </pages/internal_comms/internal_comms>
+
 
 ..
 	Indices and tables

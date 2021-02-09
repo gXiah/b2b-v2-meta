@@ -2,7 +2,13 @@
 
   <panelDashboard panel_id="1" targetId="#ARP::Broadcast"></panelDashboard>
   <br>
-  <panelDashboard panel_id="2" targetId="wrong"></panelDashboard>
+  <panelDashboard panel_id="6" targetId="#ARP"></panelDashboard>
+  <br>
+  <panelDashboard panel_id="2" targetId="#SIG-mysig-1"></panelDashboard>
+  <br>
+  <panelDashboard panel_id="2" targetId="wrong" signature="mysig"></panelDashboard>
+  <br>
+  <panelDashboard panel_id="2" targetId="pipeline-1"></panelDashboard>
   <br>
   <pipelineView></pipelineView>
   <!-- ==== EXAMPLE ====

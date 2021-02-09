@@ -19,12 +19,13 @@ const state = {
 	SUBSCRIPTION_ERROR: -1,
 	SEND_ERROR: -1,
 	ARP_KEY: new PipelineController.PipelineController().get_requests_aliases().ARP,
+	SIG_KEY: new PipelineController.PipelineController().get_requests_aliases().SIG,
 
 
 	/*
 	** This is the list of Orders that have not yet been dealt with
 	*/ 
-	orders_stack: [],
+	// orders_stack: [],
 	
 
 	/*
@@ -34,19 +35,16 @@ const state = {
 	mail_room: [],
 
 	/*
-	** List of elements' subscriptions
+	** List of subscriptions (by public keys)
 	*/
-	subscriptions: []
+	subscriptions: [],
 
 
-	,val: 0 // DEV
+	refresh: 0 // This is updated with each mutation for store reactivity
 }
 
 const actions = {
 
-	/*val ({ commit }) {
-		commit('val');
-	},*/
 
 	send ({ commit }, payload){
 
@@ -55,14 +53,13 @@ const actions = {
 
 		if (order != state.controller.PARSE_ERROR){
 			// Add order or state's orders_stacks
-			
 			let target_id = state.controller.parse_id(order.target_id)
 			let body = {
 							sender_id: order.sender_id,
 							request_body: order.request_body
 						}
+
 			commit('send', {target_id, body})
-			commit('val')
 		}else{
 			return state.SEND_ERROR;
 		}
@@ -92,12 +89,9 @@ const actions = {
 
 export const mutations = {
 
-	val(state){
-		state.val++
-	},
-
 	send(state, payload){
 		state.mail_room[payload.target_id] = payload.body
+		state.refresh++
 	},
 
 	/*
@@ -126,21 +120,26 @@ const getters = {
 	listen: (state, getters) => 
 		(key, consume=false) => {
 			let ret = []
+
+			// The components profile
+			let subscription = {...state.subscriptions[key]}
+			let signatures_object = {...subscription.signature}
+
+			let listener_profile = {
+				private_key: key,
+				public_id: subscription.public_id,
+				signatures: Object.keys(signatures_object).map((key) => signatures_object[key])
+			}
+
 			ret = [
-				state.mail_room[key], 
+				state.controller.get_direct_requests(listener_profile.public_id, state.mail_room), 
 				state.controller.get_special_requests(state.ARP_KEY, state.mail_room),
-				state.val
+				state.controller.get_special_requests(state.SIG_KEY, state.mail_room, listener_profile.signatures),
+				state.refresh
 			]
-			
+
 			return ret
 		}
-
-	
-	/*val: (state) => (k) => {
-		return k;
-	}*/
-	
-	
 
 }
 

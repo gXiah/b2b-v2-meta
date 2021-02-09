@@ -1,7 +1,7 @@
 <template>
     <div id="panel-dashboard">
         <h2>Panel #{{panel_id}}</h2>
-        <vuiButton :targetId="targetId"></vuiButton>
+        <vuiButton :targetId="targetId" :signature="signature"></vuiButton>
     </div>
 </template>
 
@@ -14,7 +14,8 @@
 
         props: [
             'panel_id',
-            'targetId'
+            'targetId',
+            "signature"
         ],
 
         components: {

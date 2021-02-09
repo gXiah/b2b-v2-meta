@@ -17,7 +17,8 @@
 		},
 
 		props: [
-			'targetId'
+			'targetId',
+			"signature"
 		],
 
 		mounted(){
@@ -26,7 +27,7 @@
 							{
 								public_id: this.public_id,
 								private_key: this.private_key,
-								signatures: ["button"]
+								signatures: [this.$props.signature]
 							}
 						)
 		},
@@ -39,7 +40,7 @@
 										{	
 											sender_key: this.private_key,
 											sender_id:this.public_id,
-											request_body: {a:1,b:"2"},
+											request_body: {a: `msg from ${this.public_id}`},
 											target_id: this.$props.targetId
 										}
 									)
