@@ -230,7 +230,6 @@ class PipelineController{
 
 		if (request_filters !== undefined){
 			filters = request_filters.join('-')
-			console.log('filter', filters)
 		}
 
 		let req_regex = new RegExp(

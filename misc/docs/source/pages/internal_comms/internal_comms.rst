@@ -62,7 +62,7 @@ Subscribing
 In order to subscribe to the pipeline, a component has to provide a set of data entries,
 
 which are :
- - His *public_id* and *privat_key*
+ - Its *public_id* and *privat_key*
  - A list of *signatures*
 
 Signatures are another was for components to communicate with each other, indeed while each components should have a unique set of public id / private key, multiple components can share the signatures (think of sigantures as *tags* or HTML *classes*)
@@ -129,7 +129,13 @@ Sending a message
 .. code-block:: javascript
 	:linenos:
 
-	// @TODO
+	this.$store.dispatch('pipeline/send',{	
+					sender_key: this.private_key,
+					sender_id:this.public_id,
+					request_body: {a:1,b:"2"},
+					target_id: "target-id"
+					}
+				)
 
 *Broadcast Messages*
 
@@ -151,6 +157,12 @@ Sending a message
 .. code-block:: javascript
 	:linenos:
 
-	// @TODO
+	this.$store.dispatch('pipeline/send',{	
+					sender_key: this.private_key,
+					sender_id:this.public_id,
+					request_body: {a:1,b:"2"},
+					target_id: "#SIG-targetSig"
+					}
+				)
 
 @todo

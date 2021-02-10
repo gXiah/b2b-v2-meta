@@ -1,6 +1,7 @@
 <template>
     <div id="panel-dashboard">
         <h2>Pipeline View</h2>
+        <h5>(ID#{{ public_id }} - Signatures [{{ signature }}])</h5>
         <br>
         
         <div class="col-3">
