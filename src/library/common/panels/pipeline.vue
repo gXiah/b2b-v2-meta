@@ -4,7 +4,7 @@
         <br>
         
         <div class="col-3">
-            <h5>Broadcast (ARP)</h5>
+            <h5>Direct Msg | {{listener[0].length}}</h5>
             <hr><br>
             <p 
                 v-for="req in listener[0]" v-bind:key="req"
@@ -21,7 +21,7 @@
             </p>
         </div>
         <div class="col-3">
-            <h5>Broadcast (ARP)</h5>
+            <h5>Broadcast (ARP) | {{listener[1].length}}</h5>
             <hr><br>
             <p 
                 v-for="req in listener[1]" v-bind:key="req"
@@ -38,7 +38,7 @@
             </p>
         </div>
         <div class="col-3">
-            <h5>Signatures (SIG)</h5>
+            <h5>Signatures (SIG) | {{listener[2].length}}</h5>
             <hr><br>
             <p 
                 v-for="req in listener[2]" v-bind:key="req"
@@ -72,6 +72,7 @@
         },
 
         props: [
+            'signature'
         ],
 
         components: {
@@ -83,7 +84,7 @@
                             {
                                 public_id: this.public_id,
                                 private_key: this.private_key,
-                                signatures: ["pipeline"]
+                                signatures: [this.$props.signature]
                             }
                         )
         },

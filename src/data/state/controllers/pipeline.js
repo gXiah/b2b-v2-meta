@@ -224,12 +224,19 @@ class PipelineController{
 	**					example : #Sig:Signtaure-myCustomSignature can be
 	**							  selected using ["myCustomSignature"]
 	*/
-	get_special_requests(request_type, haystack, request_filters){
+	get_special_requests(request_type, haystack, request_filters=undefined){
+
+		let filters = '(.*)';
+
+		if (request_filters !== undefined){
+			filters = request_filters.join('-')
+			console.log('filter', filters)
+		}
 
 		let req_regex = new RegExp(
 									"" 
 								+ 	this.REQUESTS_ALIASES[request_type]
-								+ 	"-(.*)"
+								+ 	`-${filters}`
 							)
 
 		let ret = [] // List of orders to be returned
@@ -240,6 +247,7 @@ class PipelineController{
 				ret.push(this.fillOrder(key, haystack, this.ORDER));
 			}
 		})		
+
 
 		return ret;
 	}

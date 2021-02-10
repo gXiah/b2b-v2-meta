@@ -16,7 +16,7 @@ body{
 // Every class starting with ".col-"
 @each $width in 2, 3, 4{
 	.col-#{$width} {
-		min-height: 100vh;
+		// min-height: 100vh;
 		display: inline-block;
 		vertical-align: top;
 	}
