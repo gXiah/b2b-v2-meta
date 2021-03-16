@@ -5,9 +5,9 @@
       <br>
       <panelDashboard panel_id="2" targetId="#ARP"></panelDashboard>
       <br>
-      <panelDashboard panel_id="3" targetId="#SIG-pipesig"></panelDashboard>
+      <panelDashboard panel_id="3" targetId="#SIG-pipesig" signature="REMOVEME"></panelDashboard>
       <br>
-      <panelDashboard panel_id="4" targetId="#SIG-wrongSig"></panelDashboard>
+      <panelDashboard panel_id="4" targetId="#SIG-wrongSig" signature=" "></panelDashboard>
       <br>
       <panelDashboard panel_id="5" targetId="wrong" signature="mysig"></panelDashboard>
       <br>
@@ -21,7 +21,7 @@
     </div>
   </div>
   <div class="col-2">
-    <pipelineView signature="pipesig"></pipelineView>
+    <pipelineView signature="pipesig pipehas2sigs"></pipelineView>
   </div>
   <!-- ==== EXAMPLE ====
     <leftPane></leftPane>

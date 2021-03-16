@@ -16,6 +16,8 @@
 
 import { GUID } from '@guid';
 import { Types } from '@utils/consistency/types';
+import { Lists } from '@utils/consistency/lists';
+
 
 export class Subscription{
 
@@ -58,14 +60,24 @@ export class Subscription{
 	** =======
 	*/
 
+
+	/*
+	** @return <String>
+	*/
 	get_public_id(){
 		return this.public_id
 	}
 
+	/*
+	** @return <String>
+	*/
 	get_private_key(){
 		return this.private_key
 	}
 
+	/*
+	** @return <Array>
+	*/
 	get_signatures(){
 		return this.signatures
 	}
@@ -129,13 +141,14 @@ export class Subscription{
 				debug <boolean> if true, the value is not set (used to check if
 				value)
 	** @return <boolean>
-	** @raises this.#TYPE_ERROR if type is not <Array(<string>)>
+	** @retur this.#TYPE_ERROR if type is not <Array(<string>)>
 	*/
 	set_signatures(signatures, debug=false){
 
 		if (Types.isArrayOf(signatures, Types.isString, true)){
 			if (!debug){
-				this.signatures = signatures
+				// >--------------> Removing " " from signatures
+				this.signatures = Lists.removeMatches(signatures, [" "])
 			}
 			return true
 		}else{

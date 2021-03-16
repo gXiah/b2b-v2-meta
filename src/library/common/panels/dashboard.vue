@@ -15,7 +15,7 @@
         props: [
             'panel_id',
             'targetId',
-            "signature"
+            'signature'
         ],
 
         components: {

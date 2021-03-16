@@ -1,5 +1,8 @@
 # b2b-v2-meta
 
+# /!\ Still in develoment /!\
+(The docs [link](https://b2b-v2.readthedocs.io/en/latest/))
+
 ## Project setup
 ```
 npm install

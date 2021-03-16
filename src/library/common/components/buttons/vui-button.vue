@@ -18,10 +18,11 @@
 
 		props: [
 			'targetId',
-			"signature"
+			'signature'
 		],
 
 		mounted(){
+			console.log(this.$props.signature)
 			this.$store.dispatch(
 							'pipeline/subscribe',
 							{

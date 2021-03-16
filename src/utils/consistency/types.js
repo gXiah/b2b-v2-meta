@@ -55,9 +55,7 @@ export class Types{
 		*/
 		static isArrayOf(subject, innerTypeMethod, undefinedOk=false){
 
-			let isArray = this.isArray(subject)
-
-			if (isArray){
+			if (this.isArray(subject)){
 
 				let foundWrongType = false
 

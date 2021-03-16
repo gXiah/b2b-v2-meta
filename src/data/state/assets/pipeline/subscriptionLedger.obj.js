@@ -111,12 +111,14 @@ export class SubscriptionLedger{
 		// Check: if subscription object is valid
 		if (this.#sampleSubscription.isValidSubscription(subscriptionObject)){
 			
-			this.addSubscription_main_list(subscriptionObject)
-			this.addSubscription_publicId(subscriptionObject)
-			this.addSubscription_privateKey(subscriptionObject)
-			this.addSubscription_signature(subscriptionObject)
+			let subscription_internal_id = this.addSubscription_main_list(subscriptionObject)
 
-			console.info(this.#subscriptions)
+			if (subscription_internal_id != false){
+				this.addSubscription_publicId(subscriptionObject, subscription_internal_id)
+				this.addSubscription_privateKey(subscriptionObject, subscription_internal_id)
+				this.addSubscription_signature(subscriptionObject, subscription_internal_id)				
+			}
+			//console.info(this.#subscriptions_by_privateKey)
 
 		}else{
 			this.#FLAG = this.#NON_VALID_SUBSCRIPTION
@@ -125,6 +127,13 @@ export class SubscriptionLedger{
 
 	}
 
+		/*
+		** Internal (private method)
+		** Adds a subscription to #subscriptions
+		**
+		** @params subscriptionObject <Subscription>
+		** @returns <boolean>
+		*/
 		addSubscription_main_list(subscriptionObject){
 
 			if (this.#sampleSubscription.isValidSubscription(subscriptionObject)){
@@ -132,7 +141,6 @@ export class SubscriptionLedger{
 				// arbitrarily decided it to be the first 'internal_id_size' chars 
 				// of the subscription's private_key
 				let internal_id_size = 5
-				//let internal_id = GUID.generate(internal_id_size)
 				let internal_id = GUID.truncate(subscriptionObject.get_private_key() ,internal_id_size)
 
 				// Preventing duplicates
@@ -142,7 +150,7 @@ export class SubscriptionLedger{
 
 
 				this.#subscriptions[internal_id] = subscriptionObject
-				return true
+				return internal_id
 
 			}else{
 				this.#FLAG = this.#NON_VALID_SUBSCRIPTION
@@ -150,8 +158,40 @@ export class SubscriptionLedger{
 			}
 		}
 
-		addSubscription_publicId(subscriptionObject){}
-		addSubscription_privateKey(subscriptionObject){}
-		addSubscription_signature(subscriptionObject){}
+		addSubscription_publicId(subscriptionObject, internal_id){
+
+			if (this.#sampleSubscription.isValidSubscription(subscriptionObject)){
+				let public_id = subscriptionObject.get_public_id()
+
+				if (!(public_id in this.#subscriptions_by_publicId)){
+					this.#subscriptions_by_publicId[public_id] = internal_id
+				}
+			}
+
+		}
+
+
+		addSubscription_privateKey(subscriptionObject, internal_id){
+
+			if (this.#sampleSubscription.isValidSubscription(subscriptionObject)){
+				let private_key = subscriptionObject.get_private_key()
+
+				if (!(private_key in this.#subscriptions_by_privateKey)){
+					this.#subscriptions_by_privateKey[private_key] = internal_id
+				}
+			}
+
+		}
+		addSubscription_signature(subscriptionObject, internal_id){
+
+			if (this.#sampleSubscription.isValidSubscription(subscriptionObject)){
+
+				let signatures = subscriptionObject.get_signatures()
+
+				
+
+			}	
+
+		}
 	
 }
