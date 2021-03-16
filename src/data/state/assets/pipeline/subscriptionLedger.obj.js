@@ -188,7 +188,7 @@ export class SubscriptionLedger{
 
 				let signatures = subscriptionObject.get_signatures()
 
-				
+				// @TODO
 
 			}	
 
