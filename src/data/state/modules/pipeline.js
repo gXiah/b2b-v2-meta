@@ -7,6 +7,8 @@
 */
 
 import { PipelineController } from '../controllers/pipeline';
+import { Subscription } from '../assets/pipeline/subscription.obj'
+import { SubscriptionLedger } from '../assets/pipeline/subscriptionLedger.obj'
 
 let pipelineController = new PipelineController()
 
@@ -37,9 +39,10 @@ const state = {
 	mail_room: [],
 
 	/*
-	** List of subscriptions (by public keys)
+	** List of subscriptions (by private keys)
 	*/
 	subscriptions: [],
+	subscriptionLedger: new SubscriptionLedger("pipeline subscriptions ledger"),
 
 
 	refresh: 0 // This is updated with each mutation for store reactivity
@@ -74,6 +77,14 @@ const actions = {
 		// Parse and check payload
 		let subscription = state.controller.parse(payload, state.controller.SUBSCRIPTION)
 
+		let tmp_sub = new Subscription(payload)
+		if (tmp_sub.isValidSubscription()){
+			state.subscriptionLedger.addSubscription(tmp_sub)
+		}else{
+			return state.SUBSCRIPTION_ERROR
+		}
+
+
 		if (subscription != state.controller.PARSE_ERROR){
 			// Add subscription to state
 
@@ -89,6 +100,14 @@ const actions = {
 
 }
 
+
+/*
+** 	/!\ IMPORTANT /!\
+**
+**  To be able to have store reactivity, each mutation need to update 
+	state.refresh (an increment is standard, but is not the only way)
+**
+*/
 export const mutations = {
 
 	send(state, payload){
@@ -98,7 +117,7 @@ export const mutations = {
 
 	/*
 	** This method deletes an element from the mail room
-	**	Only the target can delete a message that was meant to it
+	**	Only the target can delete a message that was meant for it
 	**
 	*/
 	/* @TODO
@@ -123,7 +142,7 @@ const getters = {
 		(key, consume=false) => {
 			let ret = []
 
-			// The components profile
+			// The component's profile
 			let subscription = {...state.subscriptions[key]}
 			let signatures_object = {...subscription.signature}
 

@@ -85,9 +85,7 @@ export class PipelineController{
 	PARSE_ERROR = -1;
 
 
-	constructor(){
-		let s = new Subscription("public id","privateKey",["right","type"])
-	}
+	constructor(){}
 
 	get_requests_aliases(){
 		return this.REQUESTS_ALIASES
