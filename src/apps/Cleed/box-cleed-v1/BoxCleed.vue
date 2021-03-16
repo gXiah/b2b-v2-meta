@@ -7,13 +7,13 @@
       <br>
       <panelDashboard panel_id="3" targetId="#SIG-pipesig"></panelDashboard>
       <br>
-      <panelDashboard panel_id="5" targetId="#SIG-wrongSig"></panelDashboard>
+      <panelDashboard panel_id="4" targetId="#SIG-wrongSig"></panelDashboard>
       <br>
-      <panelDashboard panel_id="4" targetId="wrong" signature="mysig"></panelDashboard>
+      <panelDashboard panel_id="5" targetId="wrong" signature="mysig"></panelDashboard>
       <br>
-      <panelDashboard panel_id="5" targetId="pipeline-1"></panelDashboard>
+      <panelDashboard panel_id="6" targetId="pipeline-1"></panelDashboard>
       <br>
-      <panelDashboard panel_id="5" targetId="pipeline-wrong"></panelDashboard>
+      <panelDashboard panel_id="7" targetId="pipeline-wrong"></panelDashboard>
       <br>
     </div>
     <div class="col-2">

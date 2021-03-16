@@ -6,11 +6,13 @@
 **
 */
 
-import PipelineController from '../controllers/pipeline';
+import { PipelineController } from '../controllers/pipeline';
+
+let pipelineController = new PipelineController()
 
 const state = {
 	module_name : 'pipeline',
-	controller: new PipelineController.PipelineController(),
+	controller: pipelineController,
 
 
 	/*
@@ -18,8 +20,8 @@ const state = {
 	*/
 	SUBSCRIPTION_ERROR: -1,
 	SEND_ERROR: -1,
-	ARP_KEY: new PipelineController.PipelineController().get_requests_aliases().ARP,
-	SIG_KEY: new PipelineController.PipelineController().get_requests_aliases().SIG,
+	ARP_KEY: pipelineController.get_requests_aliases().ARP,
+	SIG_KEY: pipelineController.get_requests_aliases().SIG,
 
 
 	/*

@@ -17,6 +17,10 @@ import 'es6-promise/auto';
 import VueLogger from 'vuejs-logger';
 
 
+/*
+** =================================
+*/
+
 // Configuration Setup
 let config = new Configuration.Configuration()
 config.setGlobal(process.env.VUE_APP_GLOBAL_CONFIG_FILE)
@@ -49,16 +53,16 @@ config
 		
 		/* Checks */
 
-		// Checking to see if session has expired
+			// Check to see if session has expired
 			store.dispatch('session/check_expired')
-				.then(() => {
+				.then(() => { // Session has expired
 					store.dispatch('session/destroy')
 					store.dispatch(
 									'session/generate', 
 									{lifespan: store.getters['main/session_lifespan']}
 								)	
 				})
-				.catch(() => {})
+				.catch(() => {}) // Session hasn't expired yet
 
 
 

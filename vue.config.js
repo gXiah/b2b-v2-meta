@@ -34,10 +34,14 @@ module.exports = {
 					"@libcustom": path.resolve(__dirname, 'src/library/custom'),
 
 				"@config": path.resolve(__dirname, 'src/configuration'),
-				"@guid": path.resolve(__dirname, 'src/data/state/controllers/guid')
+				
+				"@guid": path.resolve(__dirname, 'src/data/state/controllers/guid'),
+				
+				"@utils": path.resolve(__dirname, 'src/utils')
 			}
 		}
 	},
+
 
 	// Main file (Where the app is mounted)
 	chainWebpack: (config) => {

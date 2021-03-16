@@ -5,8 +5,9 @@
 */
 
 import { GUID } from './guid';
+import { Subscription } from '../assets/pipeline/subscription.obj'
 
-class PipelineController{
+export class PipelineController{
 
 	/* 
 	** ======================================================
@@ -84,7 +85,9 @@ class PipelineController{
 	PARSE_ERROR = -1;
 
 
-	constructor(){}
+	constructor(){
+		let s = new Subscription("public id","privateKey",["right","type"])
+	}
 
 	get_requests_aliases(){
 		return this.REQUESTS_ALIASES
@@ -251,8 +254,4 @@ class PipelineController{
 		return ret;
 	}
 
-}
-
-export default {
-	PipelineController
 }
