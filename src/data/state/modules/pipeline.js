@@ -115,21 +115,6 @@ export const mutations = {
 		state.refresh++
 	},
 
-	/*
-	** This method deletes an element from the mail room
-	**	Only the target can delete a message that was meant for it
-	**
-	*/
-	/* @TODO
-	delete_message(state, target_id, private_key){
-
-		state.subscriptions.forEach((sub) => {
-			console.log(sub)
-		})
-
-	}
-	*/
-
 }
 
 const getters = {

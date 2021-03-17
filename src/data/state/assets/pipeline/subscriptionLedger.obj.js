@@ -44,6 +44,7 @@ export class SubscriptionLedger{
 	#subscriptions = {}
 	#subscriptions_by_publicId = {}
 	#subscriptions_by_privateKey = {}
+	#subscriptions_by_signatures = {}
 
 
 	// This is a sample subscription to be used for comparison and checks
@@ -118,7 +119,9 @@ export class SubscriptionLedger{
 				this.addSubscription_privateKey(subscriptionObject, subscription_internal_id)
 				this.addSubscription_signature(subscriptionObject, subscription_internal_id)				
 			}
-			//console.info(this.#subscriptions_by_privateKey)
+			
+
+			console.info(this.#subscriptions_by_signatures)
 
 		}else{
 			this.#FLAG = this.#NON_VALID_SUBSCRIPTION
@@ -158,6 +161,13 @@ export class SubscriptionLedger{
 			}
 		}
 
+		/*
+		** Adds a subscription to the subscriptions by public id list
+		**
+		** @params 	subscriptionObject <Subscription>
+					internal_id <String>
+		** @return <boolean>
+		*/
 		addSubscription_publicId(subscriptionObject, internal_id){
 
 			if (this.#sampleSubscription.isValidSubscription(subscriptionObject)){
@@ -165,12 +175,25 @@ export class SubscriptionLedger{
 
 				if (!(public_id in this.#subscriptions_by_publicId)){
 					this.#subscriptions_by_publicId[public_id] = internal_id
+				
+					return true
 				}
+
+				return false
+			}else{
+				return false
 			}
 
 		}
 
 
+		/*
+		** Adds a subscription to the subscriptions by private key list
+		**
+		** @params 	subscriptionObject <Subscription>
+					internal_id <String>
+		** @return <boolean>
+		*/
 		addSubscription_privateKey(subscriptionObject, internal_id){
 
 			if (this.#sampleSubscription.isValidSubscription(subscriptionObject)){
@@ -178,17 +201,57 @@ export class SubscriptionLedger{
 
 				if (!(private_key in this.#subscriptions_by_privateKey)){
 					this.#subscriptions_by_privateKey[private_key] = internal_id
+
+					return true
 				}
+
+				return false
+			}else{
+				return false
 			}
 
 		}
+
+
+		/*
+		** Adds a subscription to the subscriptions by signatures list
+		**
+		** @params 	subscriptionObject <Subscription>
+					internal_id <String>
+		** @return <boolean>
+		*/
 		addSubscription_signature(subscriptionObject, internal_id){
 
 			if (this.#sampleSubscription.isValidSubscription(subscriptionObject)){
 
 				let signatures = subscriptionObject.get_signatures()
 
-				// @TODO
+				// ======
+				// Remove
+				// vvvvvv
+				//signatures = [...signatures, ...signatures]
+				// ^^^^^^
+
+				if (Types.isArray(signatures)){
+
+					signatures.forEach((signature) => {
+
+						// If the current signature is not in the subscriptions 
+						// by signatures list, we add it to is and append an
+						// empty array as its value
+						if (!this.#subscriptions_by_signatures[signature]){
+							this.#subscriptions_by_signatures[signature] = []
+						}
+
+						try{
+							this.#subscriptions_by_signatures[signature].push(internal_id)
+						}catch{
+							return false
+						}
+
+					})
+
+				}
 
 			}	
 

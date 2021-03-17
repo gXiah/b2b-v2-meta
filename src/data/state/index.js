@@ -24,9 +24,9 @@ import createPersistedState from 'vuex-persistedstate';
 ** =================================
 */
 	const logger = createLogger({
-		collapsed: true,
-		logActions: true,
-		logMutations: true,
+		collapsed: false,
+		logActions: false,
+		logMutations: false,
 		logger: console
 	});
 

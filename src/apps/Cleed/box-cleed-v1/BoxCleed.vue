@@ -1,9 +1,9 @@
 <template>
   <div class="col-2">
     <div class="col-2">
-      <panelDashboard panel_id="1" targetId="#ARP::Broadcast"></panelDashboard>
+      <panelDashboard panel_id="1" targetId="#ARP::Broadcast" signature="duplicateSig"></panelDashboard>
       <br>
-      <panelDashboard panel_id="2" targetId="#ARP"></panelDashboard>
+      <panelDashboard panel_id="2" targetId="#ARP" signature="duplicateSig"></panelDashboard>
       <br>
       <panelDashboard panel_id="3" targetId="#SIG-pipesig" signature="REMOVEME"></panelDashboard>
       <br>
@@ -21,7 +21,7 @@
     </div>
   </div>
   <div class="col-2">
-    <pipelineView signature="pipesig pipehas2sigs"></pipelineView>
+    <pipelineView signature="pipesig"></pipelineView>
   </div>
   <!-- ==== EXAMPLE ====
     <leftPane></leftPane>

@@ -147,8 +147,11 @@ export class Subscription{
 
 		if (Types.isArrayOf(signatures, Types.isString, true)){
 			if (!debug){
-				// >--------------> Removing " " from signatures
-				this.signatures = Lists.removeMatches(signatures, [" "])
+				try{
+					this.signatures = signatures
+				}catch{
+					this.signatures = ""
+				}
 			}
 			return true
 		}else{
