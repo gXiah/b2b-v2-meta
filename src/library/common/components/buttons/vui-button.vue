@@ -27,7 +27,7 @@
 							{
 								public_id: this.public_id,
 								private_key: this.private_key,
-								signatures: [this.$props.signature]
+								signatures: this.$props.signature
 							}
 						)
 		},

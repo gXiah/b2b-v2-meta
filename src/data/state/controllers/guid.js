@@ -1,6 +1,8 @@
 /*
+** /!\ DEPRECATED /!\
 **
 ** GUID controller
+**
 **
 */
 

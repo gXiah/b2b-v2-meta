@@ -6,7 +6,7 @@
 **
 */
 
-import { GUID } from '../controllers/guid.js';
+import { GUID } from '@utils/identities/guid';
 
 /* =============================================*/
 

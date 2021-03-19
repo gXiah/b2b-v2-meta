@@ -7,8 +7,10 @@
 */
 
 import { PipelineController } from '../controllers/pipeline';
-import { Subscription } from '../assets/pipeline/subscription.obj'
-import { SubscriptionLedger } from '../assets/pipeline/subscriptionLedger.obj'
+import { Subscription } from '../assets/pipeline/subscription.obj';
+import { SubscriptionLedger } from '../assets/pipeline/subscriptionLedger.obj';
+import { MailRoom } from '../assets/pipeline/mailRoom.obj';
+import { Message } from '../assets/pipeline/message.obj';
 
 let pipelineController = new PipelineController()
 
@@ -37,21 +39,36 @@ const state = {
 	** by the components (using an action)
 	*/
 	mail_room: [],
+	internal_mailroom: new MailRoom("internal mailroom"),
+	onpremise_mailroom: new MailRoom("on premise mailroom"),
+	external_mailroom: new MailRoom("external mailroom"),
 
 	/*
-	** List of subscriptions (by private keys)
+	** List of subscriptions
 	*/
-	subscriptions: [],
+	subscriptions: [], // DEPRECATED
 	subscriptionLedger: new SubscriptionLedger("pipeline subscriptions ledger"),
 
 
 	refresh: 0 // This is updated with each mutation for store reactivity
 }
 
+
 const actions = {
 
 
 	send ({ commit }, payload){
+
+		//=====
+		// temprary
+		//=====
+		let payload_2 = {}
+		payload_2.sender_id = payload.sender_id
+		payload_2.meta_data = {}
+		payload_2.target = payload.target_id
+		payload_2.body = payload.request_body
+
+		let message = new Message(payload_2)
 
 		// Parse payload ( & Check if payload is valid)
 		let order = state.controller.parse(payload, state.controller.ORDER)
@@ -72,18 +89,33 @@ const actions = {
 
 	},
 
+	/* ===================
+	** @TODO
+	** needs to return a 
+	** subscriber profile
+	** (or false)
+	** ===================
+	*/
 	subscribe({ commit }, payload){
 
-		// Parse and check payload
-		let subscription = state.controller.parse(payload, state.controller.SUBSCRIPTION)
-
 		let tmp_sub = new Subscription(payload)
+
 		if (tmp_sub.isValidSubscription()){
+
 			state.subscriptionLedger.addSubscription(tmp_sub)
+
 		}else{
 			return state.SUBSCRIPTION_ERROR
 		}
 
+		//   DEPRECATED =========================================
+		
+		// This is the old version of the ledger, will be deleted when the time
+		// comes
+
+
+		// Parse and check payload
+		let subscription = state.controller.parse(payload, state.controller.SUBSCRIPTION)
 
 		if (subscription != state.controller.PARSE_ERROR){
 			// Add subscription to state
@@ -95,6 +127,8 @@ const actions = {
 		}else{
 			return state.SUBSCRIPTION_ERROR
 		}
+
+		// # DEPRECATED =========================================
 
 	}
 

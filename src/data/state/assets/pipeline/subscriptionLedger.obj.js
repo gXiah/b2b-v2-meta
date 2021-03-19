@@ -74,18 +74,93 @@ export class SubscriptionLedger{
 	}
 
 
+	get_subscriptions(){
+		return this.#subscriptions
+	}
+
+	get_all_subscriptions_by_public_id(){
+		return this.#subscriptions_by_publicId
+	}
+
+
+	get_all_subscriptions_by_signatures(){
+		return this.#subscriptions_by_signatures
+	}
+
 	/*
 	** GETTER
 	** @param private_key <string> the private key of the desired subscription
-	** @return subscription with private key 'private_key'
+	** @return 	<Subscription> subscription with private key 'private_key'
+				<boolean> false
 	*/
 	get_subscription_by_private_key(private_key){
-		return -1
+		try{
+			let internal_id = this.#subscriptions_by_privateKey[private_key]
+
+			return this.#subscriptions[internal_id]
+		}catch{
+			return false
+		}
 	}
 
 		get_byPrivateKey(private_key){
 			return this.get_subscription_by_private_key(private_key)
 		}
+
+
+	/*
+	** GETTER
+	** @param public_id <string> the public id of the desired subscription
+	** @return 	<Subscription> subscription with public id 'public_id'
+				<boolean> false
+	*/
+	get_subscription_by_public_id(public_id){
+		try{
+			let internal_id = this.#subscriptions_by_publicId[public_id]
+
+			return this.#subscriptions[internal_id]
+		}catch{
+			return false
+		}
+	}
+
+		get_byPublicId(public_id){
+			return this.get_subscription_by_public_id(public_id)
+		}
+
+
+
+	/*
+	** GETTER
+	** @param signature <string> the signature of the desired subscription
+	** @return 	<Array(<Subscription>)> subscriptions with signature 'signature'
+				<boolean> false
+	*/
+	get_subscription_by_signature(signature){
+		try{
+			let internal_ids_list = this.#subscriptions_by_signatures[signature]
+			let return_list = []
+
+			if(Types.isArray(internal_ids_list)){
+				internal_ids_list.forEach((internal_id) => {
+					return_list.push(this.#subscriptions[internal_id])
+				})
+
+				return return_list
+			}else{
+				return false
+			}
+
+		}catch(e){
+			return false
+		}
+	}
+
+		get_bySignature(signature){
+			return this.get_subscription_by_signature(signature)
+		}
+
+
 
 
 	/*
@@ -117,11 +192,13 @@ export class SubscriptionLedger{
 			if (subscription_internal_id != false){
 				this.addSubscription_publicId(subscriptionObject, subscription_internal_id)
 				this.addSubscription_privateKey(subscriptionObject, subscription_internal_id)
-				this.addSubscription_signature(subscriptionObject, subscription_internal_id)				
+				this.addSubscription_signature(subscriptionObject, subscription_internal_id)
+
+				return true			
+			}else{
+				return false
 			}
 			
-
-			console.info(this.#subscriptions_by_signatures)
 
 		}else{
 			this.#FLAG = this.#NON_VALID_SUBSCRIPTION
@@ -225,12 +302,6 @@ export class SubscriptionLedger{
 			if (this.#sampleSubscription.isValidSubscription(subscriptionObject)){
 
 				let signatures = subscriptionObject.get_signatures()
-
-				// ======
-				// Remove
-				// vvvvvv
-				//signatures = [...signatures, ...signatures]
-				// ^^^^^^
 
 				if (Types.isArray(signatures)){
 

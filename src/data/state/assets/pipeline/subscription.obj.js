@@ -45,11 +45,16 @@ export class Subscription{
 				}
 	**  @return this.isValidSubscription(this) -> true / false
 	*/
-	constructor({public_id, private_key, signatures}={}){
-
+	constructor({public_id, private_key, signatures}={}, signatures_separator=" "){
+		
 		this.set_public_id(public_id)
 		this.set_private_key(private_key)
-		this.set_signatures(signatures)
+
+		try{
+			this.set_signatures(signatures.split(signatures_separator))
+		}catch{
+			1+1
+		}
 
 	}
 
@@ -136,14 +141,15 @@ export class Subscription{
 
 
 	/*
-	** SIGNATURES SETTER
-	** @params signatures <Array(<string>)>
+	** SIGNATURES parser and SETTER
+	** parses the signatures (separator is separator) and adds them to the this.signatures
+	** @params signatures <string>
 				debug <boolean> if true, the value is not set (used to check if
 				value)
 	** @return <boolean>
 	** @retur this.#TYPE_ERROR if type is not <Array(<string>)>
 	*/
-	set_signatures(signatures, debug=false){
+	set_signatures(signatures, debug=false, separator=" "){
 
 		if (Types.isArrayOf(signatures, Types.isString, true)){
 			if (!debug){

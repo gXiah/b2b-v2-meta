@@ -18,15 +18,16 @@ import session_module 	from './modules/session';
 import { createLogger } 	from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
 
+
 /*
 ** =================================
 ** Plugins
 ** =================================
 */
 	const logger = createLogger({
-		collapsed: false,
-		logActions: false,
-		logMutations: false,
+		collapsed: true,
+		logActions: true,
+		logMutations: true,
 		logger: console
 	});
 
@@ -77,6 +78,7 @@ const store = createStore({
 		: [...prod_plugins, ...common_plugins]
 
 });
+
 
 
 export default{
