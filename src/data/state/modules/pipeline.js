@@ -12,7 +12,9 @@ import { SubscriptionLedger } from '../assets/pipeline/subscriptionLedger.obj';
 import { MailRoom } from '../assets/pipeline/mailRoom.obj';
 import { Message } from '../assets/pipeline/message.obj';
 
+
 let pipelineController = new PipelineController()
+
 
 const state = {
 	module_name : 'pipeline',
@@ -59,16 +61,7 @@ const actions = {
 
 	send ({ commit }, payload){
 
-		//=====
-		// temprary
-		//=====
-		let payload_2 = {}
-		payload_2.sender_id = payload.sender_id
-		payload_2.meta_data = {}
-		payload_2.target = payload.target_id
-		payload_2.body = payload.request_body
-
-		let message = new Message(payload_2)
+		let message = new Message(payload)
 
 		// Parse payload ( & Check if payload is valid)
 		let order = state.controller.parse(payload, state.controller.ORDER)

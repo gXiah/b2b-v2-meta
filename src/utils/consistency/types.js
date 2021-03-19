@@ -81,4 +81,15 @@ export class Types{
 
 		}
 
+
+	static isDict(subject){
+
+		return (typeof(subject)=='object' && subject.constructor == Object)
+
+	}
+
+	static isObject(subject){
+		return typeof(subject)=='object'
+	}
+
 }

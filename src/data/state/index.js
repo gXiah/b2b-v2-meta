@@ -79,7 +79,17 @@ const store = createStore({
 
 });
 
-
+store.dispatch('pipeline/send',
+                            {	
+								sender_key: 'test priv key',
+								sender_id: 'test pub id',
+								body: {a: `msg from test pub id`},
+								target: 'test target id',
+								meta_data: {},
+								non_necessary_param: '',
+								meh: 1
+							}
+						)
 
 export default{
 	store
