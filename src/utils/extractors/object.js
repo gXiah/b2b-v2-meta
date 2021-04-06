@@ -20,7 +20,7 @@ export class ObjectExtractor{
 
 
 	/*
-	** Tries to extracts a matching image of the blueprint from the payload 
+	** Tries to extract a matching image of the blueprint from the payload 
 	**
 	** @params 	payload		<Object>
 				blueprint 	<Object> dictionnary of keys and check methods
@@ -53,6 +53,11 @@ export class ObjectExtractor{
 		try{
 
 			let extracted_object = {}
+
+			// If an option requirement is met, this is set to true
+			// and an exception is thrown
+			// @example: all_required:true and a key is missing -> throw exc
+			let option_exception=false 
 
 			// If payload & blueprint are of type dictionnary
 			if (Types.isDict(payload) && Types.isDict(blueprint)){ 
@@ -93,11 +98,37 @@ export class ObjectExtractor{
 					}
 				})
 
-				return extracted_object
+				/*
+				** Checking if options are satisfied
+				*/
+
+				if (all_required){ // All keys are required
+					if (
+						Object.keys(extracted_object).length 
+						!= 
+						Object.keys(blueprint).length
+					){
+						option_exception = true
+					
+					}
+				}
+
+				/* EOf options checks */
+
+				if (option_exception){
+
+					throw 'One of the options requirements has not been met'
+			
+				}else{
+			
+					return extracted_object
+			
+				}
 
 			}else{
-				// throwing just to switch to the catch{} block
+
 				throw 'Payload is not a dictionnary'
+
 			}
 
 		}catch(e){

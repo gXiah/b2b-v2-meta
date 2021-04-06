@@ -15,6 +15,10 @@ import { Types } from '@utils/consistency/types'
 
 export class Message{
 
+	#FLAG = 0
+	FLAG_MESSAGE
+
+
 	/*
 	** Message data
 	**
@@ -33,24 +37,45 @@ export class Message{
 
 		meta_data : () => {}, // Can be anything or empty
 
-		sender_key : Types.isString,
-		sender_id : Types.isString,
-		target : Types.isString,
-		body : Types.isObject
+		sender_key : Types.isString, // string
+		sender_id : Types.isString, // string
+		target : Types.isString, // string
+		body : Types.isDict // object
 
 	}
 
 
 
 	constructor(payload){
-		console.info(payload)
 
+		// Extracting payload data to fill message_data
 		payload = ObjectExtractor.extract_as(
 											payload, 
 											this.message_data,
 											{all_required:true}
 										)
-		console.info('extracted payload', payload, ObjectExtractor.get_error_msg())
+
+		// if data has been correctly extracted
+		if (payload){
+
+			this.message_data = payload
+			console.log(this.message_data)
+
+		}else{
+			this.FLAG_MESSAGE = `Could not create message object`
+			return false
+
+		}
 	}
 
+
+	/*
+	** =======
+	** GETTERS
+	** =======
+	*/
+
+	get_error_msg(){
+		return this.FLAG_MESSAGE
+	}
 }

@@ -37,8 +37,7 @@
 
     
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-    <link rel="prev" title="What is section" href="../whatis/whatis.html" /> 
+    <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -83,23 +82,15 @@
               
             
             
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../intro/introduction.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../installation/dependencies.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../whatis/whatis.html">What Is</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Internal Communication Process</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#internal-commnication">Internal Commnication</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#how-it-works">How it works</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#the-needed-data">The needed data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#subscribing">Subscribing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#listening">Listening</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#sending-a-message">Sending a message</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#types-of-messages">Types of messages</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id1">Sending a message</a></li>
-</ul>
-</li>
-</ul>
-</li>
+              <p class="caption"><span class="caption-text">By Directory structure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../by_directories/apps.html">src/apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../by_directories/assets.html">src/assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../by_directories/configuration.html">src/configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../by_directories/data.html">src/data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../by_directories/library.html">src/library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../by_directories/tests.html">src/tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../by_directories/utils.html">src/utils</a></li>
 </ul>
 
             
@@ -171,8 +162,8 @@
 <h1>Internal Communication Process<a class="headerlink" href="#internal-communication-process" title="Permalink to this headline">¶</a></h1>
 <p>This section aims te define the way components communicate with <em>each other</em>
 The external communication process will be described later in this documentation</p>
-<div class="section" id="internal-commnication">
-<h2>Internal Commnication<a class="headerlink" href="#internal-commnication" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="internal-communications">
+<h2>Internal Communications<a class="headerlink" href="#internal-communications" title="Permalink to this headline">¶</a></h2>
 <p>The internal components can communicate with each others using Orders and Requests.
 Orders are messages that contains a header and a body of data.</p>
 <dl class="simple">
@@ -222,7 +213,7 @@ And it has a <em>private_key</em> for authentication purposes (For example, a co
 <p>In order to subscribe to the pipeline, a component has to provide a set of data entries,</p>
 <dl class="simple">
 <dt>which are :</dt><dd><ul class="simple">
-<li><p>His <em>public_id</em> and <em>privat_key</em></p></li>
+<li><p>Its <em>public_id</em> and <em>privat_key</em></p></li>
 <li><p>A list of <em>signatures</em></p></li>
 </ul>
 </dd>
@@ -293,7 +284,19 @@ This way, components can send messages that are aimed towards a groupd of other 
 <div class="section" id="id1">
 <h3>Sending a message<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p><em>Direct Messages</em></p>
-<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// @TODO</span>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">$store</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">(</span><span class="s1">&#39;pipeline/send&#39;</span><span class="p">,{</span>
+                                <span class="nx">sender_key</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">private_key</span><span class="p">,</span>
+                                <span class="nx">sender_id</span><span class="o">:</span><span class="k">this</span><span class="p">.</span><span class="nx">public_id</span><span class="p">,</span>
+                                <span class="nx">request_body</span><span class="o">:</span> <span class="p">{</span><span class="nx">a</span><span class="o">:</span><span class="mf">1</span><span class="p">,</span><span class="nx">b</span><span class="o">:</span><span class="s2">&quot;2&quot;</span><span class="p">},</span>
+                                <span class="nx">target_id</span><span class="o">:</span> <span class="s2">&quot;target-id&quot;</span>
+                                <span class="p">}</span>
+                        <span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
 <p><em>Broadcast Messages</em></p>
@@ -306,14 +309,26 @@ This way, components can send messages that are aimed towards a groupd of other 
 7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">$store</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">(</span><span class="s1">&#39;pipeline/send&#39;</span><span class="p">,{</span>
                                 <span class="nx">sender_key</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">private_key</span><span class="p">,</span>
                                 <span class="nx">sender_id</span><span class="o">:</span><span class="k">this</span><span class="p">.</span><span class="nx">public_id</span><span class="p">,</span>
-                                <span class="nx">request_body</span><span class="o">:</span> <span class="p">{</span><span class="nx">a</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="nx">b</span><span class="o">:</span><span class="s2">&quot;2&quot;</span><span class="p">},</span>
+                                <span class="nx">request_body</span><span class="o">:</span> <span class="p">{</span><span class="nx">a</span><span class="o">:</span><span class="mf">1</span><span class="p">,</span><span class="nx">b</span><span class="o">:</span><span class="s2">&quot;2&quot;</span><span class="p">},</span>
                                 <span class="nx">target_id</span><span class="o">:</span> <span class="s2">&quot;#ARP::Broadcast&quot;</span>
                                 <span class="p">}</span>
                         <span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
 <p><em>Signatures Messages</em></p>
-<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// @TODO</span>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">$store</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">(</span><span class="s1">&#39;pipeline/send&#39;</span><span class="p">,{</span>
+                                <span class="nx">sender_key</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">private_key</span><span class="p">,</span>
+                                <span class="nx">sender_id</span><span class="o">:</span><span class="k">this</span><span class="p">.</span><span class="nx">public_id</span><span class="p">,</span>
+                                <span class="nx">request_body</span><span class="o">:</span> <span class="p">{</span><span class="nx">a</span><span class="o">:</span><span class="mf">1</span><span class="p">,</span><span class="nx">b</span><span class="o">:</span><span class="s2">&quot;2&quot;</span><span class="p">},</span>
+                                <span class="nx">target_id</span><span class="o">:</span> <span class="s2">&quot;#SIG-targetSig&quot;</span>
+                                <span class="p">}</span>
+                        <span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
 <p>&#64;todo</p>
@@ -326,9 +341,6 @@ This way, components can send messages that are aimed towards a groupd of other 
            
           </div>
           <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../whatis/whatis.html" class="btn btn-neutral float-left" title="What is section" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-    </div>
 
   <hr/>
 

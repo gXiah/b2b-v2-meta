@@ -7,25 +7,17 @@
 Welcome to Porthole's documentation!
 ####################################
 
-Introduction
-============
+Description by directory structure
+====================================
 
 .. toctree::
-   	:maxdepth: 3
+   	:maxdepth: 1
+   	:caption: By Directory structure
 
-   	Introduction <pages/intro/introduction>
-
-	Installation </pages/installation/dependencies>
-
-	What Is </pages/whatis/whatis>
-
-	Internal Communication Process </pages/internal_comms/internal_comms>
-
-
-..
-	Indices and tables
-	==================
-
-	* :ref:`genindex`
-	* :ref:`modindex`
-	* :ref:`search`
+   	src/apps <pages/by_directories/apps.rst>
+   	src/assets <pages/by_directories/assets.rst>
+   	src/configuration <pages/by_directories/configuration.rst>
+   	src/data <pages/by_directories/data.rst>
+   	src/library <pages/by_directories/library.rst>
+   	src/tests <pages/by_directories/tests.rst>
+   	src/utils <pages/by_directories/utils.rst>

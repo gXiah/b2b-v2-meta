@@ -63,6 +63,10 @@ const actions = {
 
 		let message = new Message(payload)
 
+		// DEPRECATED
+		// vvvvvvvvvv
+
+
 		// Parse payload ( & Check if payload is valid)
 		let order = state.controller.parse(payload, state.controller.ORDER)
 
@@ -78,6 +82,9 @@ const actions = {
 		}else{
 			return state.SEND_ERROR;
 		}
+
+		// ^^^^^^^^^^^^^^
+		// EOf DEPRECATED
 
 
 	},

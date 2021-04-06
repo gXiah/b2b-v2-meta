@@ -4,9 +4,9 @@ Internal Communication Process
 This section aims te define the way components communicate with *each other*
 The external communication process will be described later in this documentation
 
-*********************
-Internal Commnication
-*********************
+***********************
+Internal Communications
+***********************
 
 The internal components can communicate with each others using Orders and Requests.
 Orders are messages that contains a header and a body of data.

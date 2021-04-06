@@ -1,0 +1,5 @@
+#!/bin/bash
+
+SOURCE=~/Documents/pro/cleed/workspace/front/b2b-v2-meta/misc/docs
+
+sphinx-autobuild $SOURCE/source $SOURCE/build/html
