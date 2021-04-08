@@ -90,7 +90,11 @@
 <li class="toctree-l1"><a class="reference internal" href="assets.html">src/assets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="configuration.html">src/configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data.html">src/data</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">src/library</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">src/library</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#importing-a-component">Importing a component</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="tests.html">src/tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">src/utils</a></li>
 </ul>
@@ -163,6 +167,121 @@
   <p><em>Description by directories</em></p>
 <div class="section" id="src-library">
 <h1>src/library<a class="headerlink" href="#src-library" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>The libraries stores the app’s graphic components (Buttons, forms, panels, …). It is divided into two categories, each one divided into two others.</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>library /</dt><dd><ul>
+<li><dl class="simple">
+<dt>common /</dt><dd><ul>
+<li><dl class="simple">
+<dt>components /</dt><dd><ul>
+<li><dl class="simple">
+<dt>SampleComponent/</dt><dd><ul>
+<li><p>component_1.vue</p></li>
+<li><p>component_2.vue</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>panels</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>custom /</dt><dd><ul>
+<li><p>components /</p></li>
+<li><p>panels /</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>The components are <em>Vue single-file components</em></p>
+</div>
+<div class="section" id="importing-a-component">
+<h2>Importing a component<a class="headerlink" href="#importing-a-component" title="Permalink to this headline">¶</a></h2>
+<p>To import a component, use one of the following links :</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">&#64;lib</span></code> -&gt; ./src/library</dt><dd><ul>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">&#64;libcommon</span></code> -&gt; ./src/library/common</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;commoncmp</span></code> -&gt; ./src/library/common/components</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;commonpnl</span></code> -&gt; ./src/library/common/panels</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;libcustom</span></code> -&gt; ./src/library/custom</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25</pre></div></td><td class="code"><div class="highlight"><pre><span></span>// Importing a sample component
+
+import vuiButton from &#39;@commoncmp/buttons/vui-button.vue&#39;;
+
+<span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
+
+    <span class="c">&lt;!-- (...) --&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">vuiButton</span> <span class="na">:targetId</span><span class="o">=</span><span class="s">&quot;targetId&quot;</span> <span class="na">:signature</span><span class="o">=</span><span class="s">&quot;signature&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">vuiButton</span><span class="p">&gt;</span>
+
+    <span class="c">&lt;!-- (...) --&gt;</span>
+
+<span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+
+        <span class="c1">// (...)</span>
+
+        <span class="nx">components</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">vuiButton</span>
+    <span class="p">}</span>
+
+    <span class="c1">// (...)</span>
+
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
 </div>
 
 

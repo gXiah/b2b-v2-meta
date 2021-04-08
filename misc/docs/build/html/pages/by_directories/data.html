@@ -92,6 +92,9 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">src/data</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#description">Description</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#index-js">index.js</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-main-module">The ‘main’ module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-pipeline-module">The ‘pipeline’ module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-session-module">The ‘session’ module</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="library.html">src/library</a></li>
@@ -175,6 +178,22 @@ Inside <em>./src/data/state/</em> you will find the main store file : <code clas
 </div>
 <div class="section" id="index-js">
 <h2>index.js<a class="headerlink" href="#index-js" title="Permalink to this headline">¶</a></h2>
+<p>The index file defines the Vuex store in a fairly common manner. It is important to notice that <strong>The store’s modules are namespaced</strong></p>
+<p>Refer to this <a class="reference external" href="https://vuex.vuejs.org/guide/modules.html#namespacing">documentation page</a></p>
+</div>
+<div class="section" id="the-main-module">
+<h2>The ‘main’ module<a class="headerlink" href="#the-main-module" title="Permalink to this headline">¶</a></h2>
+<p>Stores the session lifespan <code class="docutils literal notranslate"><span class="pre">session_lifespan</span></code>. Set to <code class="docutils literal notranslate"><span class="pre">-1</span></code> for a non-expiring session, or set to a lifespan in <em>seconds</em>.</p>
+<p>The session is stored as a persisted state element (See: <code class="docutils literal notranslate"><span class="pre">./src/data/state/index.js</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">sessionPersistedState</span></code> variable).</p>
+<p>You may also read more about persisted states <a class="reference external" href="https://www.npmjs.com/package/vuex-persistedstate">here</a></p>
+</div>
+<div class="section" id="the-pipeline-module">
+<h2>The ‘pipeline’ module<a class="headerlink" href="#the-pipeline-module" title="Permalink to this headline">¶</a></h2>
+<p><em>Not done yet</em></p>
+</div>
+<div class="section" id="the-session-module">
+<h2>The ‘session’ module<a class="headerlink" href="#the-session-module" title="Permalink to this headline">¶</a></h2>
+<p>Defines the user’s session. A user is attributed a V4 UUID upon first visit, the session can then be regenerated after expiry, or non-expiring.</p>
 </div>
 </div>
 
