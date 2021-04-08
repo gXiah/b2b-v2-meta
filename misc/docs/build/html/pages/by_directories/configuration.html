@@ -88,7 +88,13 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="apps.html">src/apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="assets.html">src/assets</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">src/configuration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">src/configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#index-js">index.js</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-files">Configuration files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#accessing-the-configuration-inside-our-app">Accessing the configuration inside our app</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="data.html">src/data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library.html">src/library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tests.html">src/tests</a></li>
@@ -167,6 +173,91 @@
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">./src/configuration</span></code> directory contains the global configuration for all apps, and can contain custom configuration data, that are specific to a particular set of apps.</p>
+<p>it is diveded into 3 main parts
+- The <code class="docutils literal notranslate"><span class="pre">index.js</span></code> file
+- The <code class="docutils literal notranslate"><span class="pre">global.conf.js</span></code> file
+- And the <em>customConfigurations/</em> folder</p>
+</div>
+<div class="section" id="index-js">
+<h2>index.js<a class="headerlink" href="#index-js" title="Permalink to this headline">¶</a></h2>
+<p>This file contains the main <em>Configuration</em> class, that is instantiated at the projects entry point (<code class="docutils literal notranslate"><span class="pre">./src/main.js</span></code>).</p>
+<p>Its main role is to load from both <code class="docutils literal notranslate"><span class="pre">global.conf.js</span></code> and one of the files inside <em>customConfiguration/</em>, the app’s configuration (The app that we aim to build, that is).</p>
+<p>The initalization is done like so :</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// ./src/main.js</span>
+
+<span class="k">import</span> <span class="nx">Configuration</span> <span class="nx">from</span> <span class="s1">&#39;@config&#39;</span><span class="p">;</span>
+
+
+<span class="kd">let</span> <span class="nx">config</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Configuration</span><span class="p">.</span><span class="nx">Configuration</span><span class="p">()</span>
+
+<span class="nx">config</span><span class="p">.</span><span class="nx">setGlobal</span><span class="p">(</span><span class="cm">/*The global config file path*/</span><span class="p">)</span>
+<span class="nx">config</span><span class="p">.</span><span class="nx">setCustom</span><span class="p">(</span><span class="cm">/*The custom config file path*/</span><span class="p">)</span>
+
+<span class="nx">config</span>
+        <span class="p">.</span><span class="nx">init</span><span class="p">()</span>
+        <span class="p">.</span><span class="nx">then</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="cm">/* Main code here */</span>
+        <span class="p">})</span>
+        <span class="p">.</span><span class="k">catch</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{})</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="configuration-files">
+<h2>Configuration files<a class="headerlink" href="#configuration-files" title="Permalink to this headline">¶</a></h2>
+<p>Be it the global configuration file, or any custom one (there must at least be one empty custom configuration file), they can both be setup in the same way:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// ./src/configuration/global.conf.js</span>
+
+<span class="k">import</span> <span class="nx">ConfObj</span> <span class="nx">from</span> <span class="s1">&#39;./config.obj.js&#39;</span><span class="p">;</span> <span class="c1">// located @ ./src/configuration/</span>
+
+<span class="c1">// Initializing a new configuration object, that will describe our</span>
+<span class="c1">// app&#39;s configuration (This one is arbitrarily named &quot;global&quot;)</span>
+<span class="kd">const</span> <span class="nx">Config</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ConfObj</span><span class="p">.</span><span class="nx">ConfObj</span><span class="p">(</span><span class="s2">&quot;global&quot;</span><span class="p">)</span>
+
+
+
+<span class="kd">let</span> <span class="nx">configurationElement</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;sample&#39;</span><span class="o">:</span>               <span class="s1">&#39;value&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+
+        <span class="c1">// Adding the configuration element to the configuration object</span>
+        <span class="c1">// and naming it &quot;Sample Config Element&quot;</span>
+        <span class="nx">Config</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;Sample Config Element&#39;</span><span class="p">,</span> <span class="nx">configurationElement</span><span class="p">)</span>
+
+
+<span class="k">export</span> <span class="k">default</span><span class="p">{</span>
+        <span class="nx">Config</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="accessing-the-configuration-inside-our-app">
+<h2>Accessing the configuration inside our app<a class="headerlink" href="#accessing-the-configuration-inside-our-app" title="Permalink to this headline">¶</a></h2>
+<p>One way by which we can access configuration elements and values is to add the <code class="docutils literal notranslate"><span class="pre">config</span></code> object to the <em>Vue prototype</em> inside <code class="docutils literal notranslate"><span class="pre">./src/main.js</span></code></p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// ./src/main.js</span>
+
+<span class="k">import</span> <span class="nx">Configuration</span> <span class="nx">from</span> <span class="s1">&#39;@config&#39;</span><span class="p">;</span>
+
+
+<span class="kd">let</span> <span class="nx">config</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Configuration</span><span class="p">.</span><span class="nx">Configuration</span><span class="p">()</span>
+
+<span class="nx">config</span><span class="p">.</span><span class="nx">setGlobal</span><span class="p">(</span><span class="cm">/*The global config file path*/</span><span class="p">)</span>
+<span class="nx">config</span><span class="p">.</span><span class="nx">setCustom</span><span class="p">(</span><span class="cm">/*The custom config file path*/</span><span class="p">)</span>
+
+<span class="nx">config</span>
+        <span class="p">.</span><span class="nx">init</span><span class="p">()</span>
+        <span class="p">.</span><span class="nx">then</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+
+                <span class="nx">Vue</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">$config</span> <span class="o">=</span> <span class="nx">config</span>
+
+                <span class="c1">//...</span>
+
+                <span class="nx">app</span><span class="p">.</span><span class="nx">mount</span><span class="p">(</span><span class="s2">&quot;#app&quot;</span><span class="p">)</span>
+
+        <span class="p">})</span>
+        <span class="p">.</span><span class="k">catch</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{})</span>
+</pre></div>
+</div>
+<p>Another way is to pass the configuration object as a dependency.</p>
 </div>
 </div>
 

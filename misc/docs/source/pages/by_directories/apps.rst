@@ -82,7 +82,7 @@ Important Notice
 Folder structure
 ^^^^^^^^^^^^^^^^
 
-A box name is structured as follow:
+For better structure, it is strongly recommended to name the box files as follows:
 
 .. code-block::
 
